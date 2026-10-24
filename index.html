@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+ <meta charset="UTF-8">
+ <!-- Rend la page responsive sur téléphone -->
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <title>TP4 - Gestion des commandes</title>
+ <!-- Bootstrap (CSS) depuis un CDN : une connexion Internet est nécessaire -->
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+ rel="stylesheet">
+ <!-- Notre CSS, chargé APRÈS Bootstrap pour pouvoir le compléter -->
+ <link href="css/style.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+ <div class="container py-4">
+ <h1 class="mb-4">Gestion des commandes</h1>
+ <!-- Zone d'erreur : cachée (d-none) tant qu'il n'y a pas d'erreur.
+ view.js : showError() la montre, hideError() la cache -->
+ <div id="errorAlert" class="alert alert-danger d-none" role="alert"></div>
+ <!-- 4 indicateurs : les "-" sont remplacés par view.js -->
+ <div class="row g-3 mb-4">
+ <div class="col-6 col-md-3">
+ <div class="card kpi-card text-center"><div class="card-body">
+ <div class="text-muted small">Clients</div>
+ <div id="kpiCustomers" class="fs-3 fw-bold">-</div>
+ </div></div>
+ </div>
+ <div class="col-6 col-md-3">
+ <div class="card kpi-card text-center"><div class="card-body">
+ <div class="text-muted small">Produits</div>
+ <div id="kpiProducts" class="fs-3 fw-bold">-</div>
+ </div></div>
+ </div>
+ <div class="col-6 col-md-3">
+ <div class="card kpi-card text-center"><div class="card-body">
+ <div class="text-muted small">Commandes</div>
+ <div id="kpiOrders" class="fs-3 fw-bold">-</div>
+ </div></div>
+ </div>
+ <div class="col-6 col-md-3">
+ <div class="card kpi-card text-center"><div class="card-body">
+ <div class="text-muted small">Chiffre d'affaires</div>
+ <div id="kpiRevenue" class="fs-3 fw-bold">-</div>
+ </div></div>
+ </div>
+ </div>
+ <!-- Recherche et filtres -->
+ <div class="row g-2 mb-3">
+ <div class="col-12 col-md-6">
+ <input id="searchInput" type="search" class="form-control"
+ placeholder="Rechercher par nom de client...">
+ </div>
+ <div class="col-6 col-md-3">
+ <!-- value = ce que le code lit ; le texte = ce que l'utilisateur voit -->
+ <select id="statusFilter" class="form-select">
+ <option value="all">Tous les statuts</option>
+ <option value="Livree">Livrée</option>
+ <option value="En attente">En attente</option>
+ <option value="Annulee">Annulée</option>
+ </select>
+ </div>
+ <div class="col-6 col-md-3">
+ <!-- Les catégories sont ajoutées par JavaScript (populateCategoryFilter) -->
+ <select id="categoryFilter" class="form-select">
+ <option value="all">Toutes les catégories</option>
+ </select>
+ </div>
+Guide TP4 - Git, GitHub, HTML, Bootstrap, JavaScript, JSON Page 22
+ </div>
+ <!-- Tableau des commandes : le <tbody> est rempli par view.js -->
+ <div class="card">
+ <div class="table-responsive">
+ <table class="table table-hover align-middle mb-0">
+ <thead class="table-dark">
+ <tr>
+ <th>N°</th><th>Client</th><th>Date</th><th>Statut</th>
+ <th class="text-end">Total</th><th></th>
+ </tr>
+ </thead>
+ <tbody id="ordersBody"></tbody>
+ </table>
+ </div>
+ </div>
+ </div>
+ <!-- Modale Bootstrap : cachée par défaut (classe "modal fade").
+ Son contenu est rempli par view.js (renderOrderModal) -->
+ <div class="modal fade" id="orderModal" tabindex="-1" aria-hidden="true">
+ <div class="modal-dialog modal-lg modal-dialog-scrollable">
+ <div class="modal-content">
+ <div class="modal-header">
+ <h5 class="modal-title" id="modalTitle">Détail</h5>
+ <button type="button" class="btn-close" data-bs-dismiss="modal"
+ aria-label="Fermer"></button>
+ </div>
+ <div class="modal-body" id="modalBody"></div>
+ </div>
+ </div>
+ </div>
+ <!-- JavaScript de Bootstrap (nécessaire pour la modale) -->
+ <script
+ src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+ </script>
+ <!-- type="module" : autorise import/export. Chargé en différé automatiquement,
+ donc le HTML ci-dessus existe déjà quand app.js s'exécute. -->
+ <script type="module" src="js/app.js"></script>
+</body>
+</html>
