@@ -1,0 +1,11 @@
+/* css/style.css
+ Petites retouches par-dessus Bootstrap (qui fait 95 % du travail). */
+/* Cartes d'indicateurs : pas de bordure, légère ombre */
+.kpi-card {
+ border: 0;
+ box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+/* Centre verticalement le contenu des cellules du tableau */
+tbody tr td {
+ vertical-align: middle;
+}
